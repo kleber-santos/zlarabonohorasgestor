@@ -1,0 +1,171 @@
+<mvc:View controllerName="whr.com.br.ZLARAbonoHorasGestor.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout">
+	<Page showHeader="true" title="Abono de Horas Gestor" showFooter="true" showNavButton="true">
+		<content>
+			<ObjectHeader ariaLabelledBy="__xmlview0--nameColumnTitle" title="{Stext}" introActive="true" titleActive="true" id="header0"
+				backgroundDesign="Translucent"></ObjectHeader>
+			<l:VerticalLayout width="100%">
+				<fb:FilterBar reset="onReset" showRestoreButton="true" showClearButton="false" showFilterConfiguration="false" search="onPesquisar">
+					<fb:filterItems>
+						<fb:FilterItem name="A" label="Período">
+							<fb:control>
+								<ComboBox xmlns:sap.ui.core="sap.ui.core" ariaLabelledBy="__xmlview0--unitNumberColumnTitle" items="{/PERIODOSet}"
+									selectedKey="{periodoModel>/CodPer}" id="comboPeriodo" width="210px" selectionChange="onchangeComboPeriodo">
+									<items>
+										<sap.ui.core:ListItem key="00" text="" enabled="true"/>
+										<sap.ui.core:ListItem key="{CodPer}" text="{Zperiodo25}" enabled="true"/>
+									</items>
+								</ComboBox>
+							</fb:control>
+						</fb:FilterItem>
+					</fb:filterItems>
+				</fb:FilterBar>
+			</l:VerticalLayout>
+			<Table id="table" items="{ path: '/ABONO_ITEMSSet' }" mode="MultiSelect" noDataText="{worklistView>/tableNoDataText}"
+				updateFinished="onUpdateFinished" selectionChange="teste">
+				<headerToolbar>
+					<Toolbar>
+						<Button text="Inserir Registro" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+							press="onInserirRegistro"/>
+						<Button text="Justificativa" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+							press="onJustificativaDialog"/>
+						<ToolbarSpacer width=""/>
+						<OverflowToolbarButton text="sort" type="Default" icon="sap-icon://sort" iconFirst="true" width="auto" enabled="true" visible="false"
+							iconDensityAware="false"/>
+						<OverflowToolbarButton text="filter" type="Default" icon="sap-icon://filter" iconFirst="true" width="auto" enabled="true" visible="false"
+							iconDensityAware="false"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column id="nameColumn">
+						<Label text="Data" id="nameColumnTitle"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" id="unitNumberColumn">
+						<Label text="Horário Teórico" id="unitNumberColumnTitle"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" id="column000">
+						<header>
+							<Label text="Turno" id="label100"/>
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" id="column0">
+						<header>
+							<Label text="Horário Realizado" id="label1"/>
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" id="column1001">
+						<header>
+							<Label text="Quantidade" id="label49"/>
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" id="column2">
+						<header>
+							<Label text="Justificativa" id="label3"/>
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" id="column1">
+						<header>
+							<Label text="Tipo de Ausência\Presença" id="label2"/>
+						</header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<VBox>
+								<items>
+									<VBox>
+										<items>
+											<FlexBox alignContent="Center">
+												<Text text="{path: 'ZlDtocor', formatter: '.formatDate'}" id="ZlDtocor"/>
+												<Text text="" id="text_blank03" width="5px"/>
+												<Text xmlns="sap.m" text="{Diasemana}" id="Inicio2"/>
+											</FlexBox>
+										</items>
+									</VBox>
+								</items>
+							</VBox>
+							<VBox>
+								<items>
+									<FlexBox alignContent="Center">
+										<Text text="{path: 'Sobeg', formatter: '.formatTime'}"/>
+										<Text text="" id="text_blank04" width="5px"/>
+										<Text text="-" id="text0001"/>
+										<Text text="" id="text_blank05" width="5px"/>
+										<Text text="{path: 'Soend', formatter: '.formatTime'}"/>
+									</FlexBox>
+									<!--	<FlexBox alignContent="Center">
+										<Label text="Quantidade" id="qtde10"/>
+										<Text text="" id="text_blank06" width="5px"/>
+										<Text text="{path: 'Sollz', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, roundingMode: 'away_from_zero'} }"/>
+									</FlexBox>-->
+								</items>
+							</VBox>
+							<Text xmlns="sap.m" text="{PspPhtdtx}" id="Fim2"/>
+							<VBox>
+								<items>
+									<FlexBox alignContent="Center">
+										<Text text="{path: 'ZlBeguz', formatter: '.formatTime'}"/>
+										<Text text="" id="text_blank99" width="5px"/>
+										<Text text="-" id="text0002"/>
+										<Text text="" id="text_blank999" width="5px"/>
+										<Text text="{path: 'ZlEnduz', formatter: '.formatTime'}"/>
+										<!--<TimePicker value="{Zl_Beguz}" displayFormat="hh:mm" placeholderSymbol="-" mask="h9:59" id="picker01" width="60px"/>-->
+									</FlexBox>
+								</items>
+							</VBox>
+							<Text text="{path: 'Hrgmt', formatter: '.formatTime'}"/>
+							<Button xmlns="sap.m" id="btn_Justificativa" press="carregarBtnJustificativa" icon="sap-icon://detail-view"/>
+							<Text xmlns="sap.m" text="{Lgtxt}" id="Tipo"/>
+							<Text xmlns="sap.m" text="{ZdescStat}" id="Status"/>
+							<Text xmlns="sap.m" text="test" id="index"/>
+							<Text xmlns="sap.m" text="{Cdmot}" id="Cdmot"/>
+							<Text xmlns="sap.m" text="{Persk}" id="Persk"/>
+							<Text xmlns="sap.m" text="{Pernr}" id="Cname"/>
+							<Text xmlns="sap.m" text="{Vtken}" id="Vtken"/>
+							<Text xmlns="sap.m" text="{ZlLgart}" id="ZlLgart"/>
+							<Text xmlns="sap.m" text="{ZlAnzhl}" id="ZlAnzhl"/>
+							<Text xmlns="sap.m" text="{PspPhtd}" id="PspPhtd"/>
+							<Text xmlns="sap.m" text="{PspPhtdtx}" id="PspPhtdtx"/>
+							<Text xmlns="sap.m" text="{Pabeg}" id="Pabeg"/>
+							<Text xmlns="sap.m" text="{Paend}" id="Paend"/>
+							<Text xmlns="sap.m" text="{TpOcor}" id="TpOcor"/>
+							<Text xmlns="sap.m" text="{Newbegtm}" id="Newbegtm"/>
+							<Text xmlns="sap.m" text="{Newendtm}" id="Newendtm"/>
+							<Text xmlns="sap.m" text="{Awart}" id="Awart"/>
+							<Text xmlns="sap.m" text="{Message}" id="Message"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<Toolbar height="46px" design="Solid" enabled="true" visible="true" class="sapUiResponsiveMargin">
+				<content>
+					<ToolbarSpacer width=""/>
+					<Button text="Aprovar" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" press="onAprovacao"
+						iconDensityAware="false"/>
+					<Button text="Recusar" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" press="onEnviarAprovacao"
+						iconDensityAware="true"/>
+				</content>
+			</Toolbar>
+		</footer>
+	</Page>
+	<!--</semantic:content>-->
+	<!--Semantic ShareMenu Buttons-->
+	<!--<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onSendEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:closeAction>
+			<semantic:CloseAction id="closeColumn" press="onCloseDetailPress"/>
+		</semantic:closeAction>
+		<semantic:fullScreenAction>
+			<semantic:FullScreenAction id="enterFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}" press="toggleFullScreen"/>
+		</semantic:fullScreenAction>
+		<semantic:exitFullScreenAction>
+			<semantic:ExitFullScreenAction id="exitFullScreen"
+				visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}" press="toggleFullScreen"/>
+		</semantic:exitFullScreenAction>-->
+	<!--</semantic:SemanticPage>-->
+</mvc:View>
